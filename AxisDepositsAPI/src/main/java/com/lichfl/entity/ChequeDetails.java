@@ -21,10 +21,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+
 
 @Table(name = "txn_details")
-// table name is  txn_details
+// table name in database is  txn_details schema is feedback in local 
 public class ChequeDetails {
 
 	@Id
