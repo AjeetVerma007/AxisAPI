@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Builder
 
 @Table(name = "txn_details")
+// table name is  txn_details
 public class ChequeDetails {
 
 	@Id
