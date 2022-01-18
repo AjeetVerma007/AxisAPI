@@ -51,10 +51,12 @@ public class ChequeRestController {
 
 	private final Logger logger = LoggerFactory.getLogger(ChequeRestController.class);
 
+
 	@PostMapping("/txns")
 	public ResponseEntity<ChequeDetails> saveChequeDtls( @RequestBody ChequeDetails chequeDetails) throws Exception   {
 
 		logger.info("Inside save method");
+		
 
 		ChequeDetails chequeDetails2 = chequeService.saveTxns(chequeDetails);
 
@@ -98,6 +100,7 @@ public class ChequeRestController {
 	public ResponseEntity<CustomUserDetails> saveUser( @RequestBody CustomUserDetails customUserDetails) {
 		
 		System.out.println("customer user details" +customUserDetails);
+		
 
 		customUserDetails = userInfoService.saveUser(customUserDetails);
 

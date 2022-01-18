@@ -1,7 +1,9 @@
 package com.lichfl.service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -22,6 +24,17 @@ public class ChequeServiceImpl implements ChequeService {
 
 	@Override
 	public ChequeDetails saveTxns(ChequeDetails chequeDetails) throws Exception {
+		
+	    final SimpleDateFormat sdf1 = new SimpleDateFormat("dd-mm-yyyy HH:mm:ss");
+
+		Date date = new Date();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		
+		if (chequeDetails.getStatus()==null && chequeDetails.getCreatedDate()==null)
+		{
+			chequeDetails.setStatus("A");
+			chequeDetails.setCreatedDate(sdf1.format(timestamp));
+		}
 
 		try {
 			return chequeRepository.save(chequeDetails);

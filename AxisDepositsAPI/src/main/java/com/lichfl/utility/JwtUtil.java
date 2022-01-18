@@ -24,15 +24,19 @@ public class JwtUtil {
 
 	 private static final long serialVersionUID = 234234523523L;
 
-	    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
-
-		/*
+	    public static final long JWT_TOKEN_VALIDITY = 5 * 60 ;
+	    
+	 		/*
 		 * @Value("${jwt.secret}") private String secretKey;
 		 */
 	    
 	    //retrieve username from jwt token
 	    public String getUsernameFromToken(String token) {
+	    	
+	        System.out.println("token validity" +new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000));
+
 	        return getClaimFromToken(token, Claims::getSubject);
+	        
 	    }
 
 	    //retrieve expiration date from jwt token
@@ -72,7 +76,8 @@ public class JwtUtil {
 	    //2. Sign the JWT using the HS512 algorithm and secret key.
 	    private String doGenerateToken(Map<String, Object> claims, String subject) {
 	        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-	                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+	                //.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+	        		.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
 	                .signWith(SignatureAlgorithm.HS512, secretKey).compact();
 	    }
 
