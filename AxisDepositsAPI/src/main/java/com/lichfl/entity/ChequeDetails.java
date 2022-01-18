@@ -34,9 +34,9 @@ public class ChequeDetails {
 	@Column(name = "txn_id")
 	private Long txnId;
 	
-	@Column(name = "value_date")
-	
+	@Column(name = "value_date")	
 	private String valueDate;
+	
 	private String description;
 	
 	@Column(name ="instrument_ref_no")
