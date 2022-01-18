@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "axis_reco_stg")
-// table name in database is  txn_details schema is feedback in local 
+// table name in database is  axis_reco_stg schema in LICHFLDBTEST - testserver
 public class ChequeDetails {
 	
 
