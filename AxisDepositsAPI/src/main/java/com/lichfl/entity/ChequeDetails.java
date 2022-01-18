@@ -31,11 +31,23 @@ public class ChequeDetails {
 	 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "txn_id")
+	private Long txnId;
+	
+	@Column(name = "value_date")
+	
 	private String valueDate;
 	private String description;
+	
+	@Column(name ="instrument_ref_no")
 	private String instrumentRefNo;
+	
+	@Column(name = "debit_amount")
 	private long debitAmount;
+	
+	@Column(name = "credit_amount")
 	private long creditAmount;
+	
 	@Column(name = "created_date")
     @CreationTimestamp
 	private LocalDateTime createdDate;
