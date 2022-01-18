@@ -82,16 +82,7 @@ public class ChequeServiceImpl implements ChequeService {
 		// TODO Auto-generated method stub
 		ChequeDetails cd = chequeRepository.findById(id).get();
 
-		if (Objects.nonNull(chequeDetails.getTxnCode()) && !"".equalsIgnoreCase(chequeDetails.getTxnCode())) {
-			cd.setTxnDetails(chequeDetails.getTxnCode());
-		}
-
-		if (Objects.nonNull(chequeDetails.getTxnType()) && !"".equalsIgnoreCase(chequeDetails.getTxnType())) {
-
-		}
-		cd.setTxnDetails(chequeDetails.getTxnDetails());
-		cd.setRemarks(chequeDetails.getRemarks());
-
+	
 		return chequeRepository.save(cd);
 
 	}
