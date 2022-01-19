@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.lichfl.controller.ChequeRestController;
+import com.lichfl.exception.TransactionException;
 import com.lichfl.service.CustomUserDetailsService;
 import com.lichfl.utility.JwtUtil;
 
@@ -58,8 +59,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
-
+           
         }
+      
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 

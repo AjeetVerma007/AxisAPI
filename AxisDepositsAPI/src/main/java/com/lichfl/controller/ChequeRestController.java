@@ -25,6 +25,7 @@ import com.lichfl.entity.ChequeDetails;
 import com.lichfl.entity.CustomUserDetails;
 import com.lichfl.entity.JwtRequest;
 import com.lichfl.entity.JwtResponse;
+import com.lichfl.exception.TransactionException;
 import com.lichfl.service.ChequeService;
 import com.lichfl.service.CustomUserDetailsService;
 import com.lichfl.service.UserInfoService;
@@ -83,8 +84,16 @@ public class ChequeRestController {
 
 	@DeleteMapping("/txns/{id}")
 	public ResponseEntity<String> deleteChequeDtlsById(@PathVariable("id") Long txnId) {
-		chequeService.deleteChequeDtlsById(txnId);
-		String message ="Transaction has been deleted";
+		String message = null;
+		
+		try {
+			chequeService.deleteChequeDtlsById(txnId);
+			 message ="Transaction has been deleted";
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new TransactionException(" ID does not exists in Database");
+		}
 		return new ResponseEntity<String>(message, HttpStatus.ACCEPTED);
 	}
 

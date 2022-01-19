@@ -32,7 +32,7 @@ public class ChequeServiceImpl implements ChequeService {
 		
 		if (chequeDetails.getStatus()==null && chequeDetails.getCreatedDate()==null)
 		{
-			chequeDetails.setStatus("A");
+			chequeDetails.setStatus("S");
 			chequeDetails.setCreatedDate(sdf1.format(timestamp));
 		}
 
@@ -85,7 +85,7 @@ public class ChequeServiceImpl implements ChequeService {
 
 	@Override
 	public void deleteChequeDtlsById(Long txnId) {
-
+		
 		chequeRepository.deleteById(txnId);
 
 	}

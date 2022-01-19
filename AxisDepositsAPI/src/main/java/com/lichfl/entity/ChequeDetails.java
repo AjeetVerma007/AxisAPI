@@ -48,6 +48,9 @@ public class ChequeDetails {
 	//@Column(columnDefinition = "varchar2(1) default 'A'")
 	private String status;
 	
+	@Column(name = "account_no")
+	private String accountNo;
+	
 	
 
 }
