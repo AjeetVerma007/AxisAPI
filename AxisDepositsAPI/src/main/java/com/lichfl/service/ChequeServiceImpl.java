@@ -74,7 +74,8 @@ public class ChequeServiceImpl implements ChequeService {
 
 		Optional<ChequeDetails> chOptional = chequeRepository.findById(txnId);
 
-		if (!chOptional.isPresent() || chOptional.isEmpty()) {
+		//if (!chOptional.isPresent() || chOptional.empty()) {
+		if (!chOptional.isPresent()){
 			throw new Exception("Such transaction does not exist");
 
 		}

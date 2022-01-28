@@ -42,8 +42,8 @@ private JwtFilter jwtFilter;
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.csrf().disable().cors().disable().authorizeRequests()
-		   //.antMatchers("/saveUser").permitAll() 
-				.antMatchers("/authenticate").permitAll()
+		   .antMatchers("/**").permitAll() 
+			//	.antMatchers("/authenticate").permitAll()
 				.anyRequest().authenticated().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
