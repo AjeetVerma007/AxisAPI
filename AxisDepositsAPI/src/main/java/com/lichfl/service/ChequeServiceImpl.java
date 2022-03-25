@@ -1,6 +1,6 @@
 package com.lichfl.service;
 
-import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lichfl.entity.ChequeDetails;
+import com.lichfl.entity.RequestParam;
 import com.lichfl.repository.ChequeRepository;
 
 @Service
@@ -25,15 +26,16 @@ public class ChequeServiceImpl implements ChequeService {
 	@Override
 	public ChequeDetails saveTxns(ChequeDetails chequeDetails) throws Exception {
 		
-	    final SimpleDateFormat sdf1 = new SimpleDateFormat("dd-mm-yyyy HH:mm:ss");
-
-		Date date = new Date();
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+	       Date date = new Date();  
+           DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");  
+           String strDate = dateFormat.format(date);  
 		
-		if (chequeDetails.getStatus()==null && chequeDetails.getCreatedDate()==null)
+		//if (chequeDetails.getStatus()==null && chequeDetails.getCreatedDate()==null)
+        if (chequeDetails.getCol23()==null)
 		{
-			chequeDetails.setStatus("S");
-			chequeDetails.setCreatedDate(sdf1.format(timestamp));
+        	logger.info("date is :"+strDate);
+			//chequeDetails.setStatus("S");
+			chequeDetails.setCol23(strDate);
 		}
 
 		try {
@@ -42,7 +44,7 @@ public class ChequeServiceImpl implements ChequeService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.info("Value of cause e is  :" + e);
-			throw new Exception("Please send valid request paramters");
+			throw new RuntimeException("Please send valid request paramters");
 			// throw new TransactionException("Please send valid request paramters ");
 		}
 
@@ -100,5 +102,21 @@ public class ChequeServiceImpl implements ChequeService {
 		return chequeRepository.save(cd);
 
 	}
+
+	@Override
+	public String validateRequestParam(RequestParam requestParam) {
+		// TODO Auto-generated method stub
+		
+		if (requestParam.getDepSlipNo()==null||requestParam.getInstAmnt()==null||requestParam.getBankLoc()==null
+				||requestParam.getProdCode()==null||requestParam.getDepDate()==null)
+		{
+			return "Mandatory parameters cannot be null";
+		}
+		
+		return "success";
+		
+	}
+
+
 
 }
