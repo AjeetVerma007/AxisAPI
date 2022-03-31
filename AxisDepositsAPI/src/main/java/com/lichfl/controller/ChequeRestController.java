@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lichfl.entity.ChequeDetails;
 import com.lichfl.entity.RequestParam;
+import com.lichfl.entity.ResponseText;
 import com.lichfl.service.ChequeService;
 
 @RestController
@@ -30,10 +31,15 @@ public class ChequeRestController {
 	@Autowired
 	ChequeService chequeService;
 
+	@Autowired
+	ResponseText responseText;
+
+	private String msg;
+
 	private final Logger logger = LoggerFactory.getLogger(ChequeRestController.class);
 
 	@PostMapping("/txns")
-	public ResponseEntity<String> saveChequeDtls(
+	public ResponseEntity<ResponseText> saveChequeDtls(
 			// @Valid @RequestBody HashMap<String, String> requestData
 			@Valid @RequestBody RequestParam requestParam
 
@@ -44,8 +50,6 @@ public class ChequeRestController {
 	) throws Exception {
 
 		logger.info("Inside save method");
-		
-		
 
 //		String custCode = requestData.get("custCode");
 //		String bankLoc = requestData.get("bankLoc");
@@ -141,9 +145,15 @@ public class ChequeRestController {
 
 			chequeService.saveTxns(chequeDetails);
 
-			return new ResponseEntity<String>("Data has been saved successfully", HttpStatus.OK);
+			msg = "Data has been saved successfully";
+
+			ResponseText responseText2 = ResponseText.builder().status("SUCCESS").message(msg).build();
+
+			return new ResponseEntity<ResponseText>(responseText2, HttpStatus.OK);
 		} else
-			return new ResponseEntity<String>(validationResp, HttpStatus.BAD_REQUEST);
+			msg = "Please check the mandatory parameters";
+		ResponseText responseText = ResponseText.builder().status("FAILURE").message(msg).build();
+		return new ResponseEntity<ResponseText>(responseText,HttpStatus.BAD_REQUEST);
 
 	}
 
